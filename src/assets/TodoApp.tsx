@@ -31,7 +31,7 @@ function TodoApp() {
     }
 
     return (
-        <div>
+        <div className='min-h-screen bg-yellow-100 flex-items-center justify-left'>
             <input
                 ref={inputRef}
                 type="text"
