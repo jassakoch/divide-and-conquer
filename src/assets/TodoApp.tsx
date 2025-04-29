@@ -31,8 +31,11 @@ function TodoApp() {
     }
 
     return (
-        <div className='min-h-screen bg-yellow-100 flex-items-center justify-left'>
+        <div className='min-h-screen bg-white-100 flex-items-center justify-left'>
+            <div className='big-white p-6 rounded-lg shadow-md w-full -max-w-md'>
+                <h1 className='text-3xl mb-4 text-center'>To-Do List</h1>
             <input
+            className='font-[Patrick-Hand]'
                 ref={inputRef}
                 type="text"
                 placeholder="Enter a todo"
@@ -51,11 +54,17 @@ function TodoApp() {
                 onClick={handleAddTodo}
             >
                 Add</button>
-            <h2>To do:</h2>
-            <ul>
+            
+            <ul 
+            className='bg-yellow-100  text-left rounded-md shadow-inner space-y-w m-15 font-[Patrick_Hand] border-dashed border-yellow-400'>
 
                 {todos.map((todo, index) => (
-                    <li key={index}>{todo}
+                    <li 
+                    
+                    key={index}
+                    className='flex items-center justify-start space-x-3 m-5 p-3'>
+                        <input type="checkbox" className='form-checkbox h-5 w-5'/>
+                        {todo}
                         <button
                             className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2"
                             onClick={() => handleRemoveTodo(todo)}
@@ -64,6 +73,7 @@ function TodoApp() {
                     </li>
                 ))}
             </ul>
+            </div>
         </div>
     );
 }
