@@ -10,6 +10,7 @@ function TodoApp() {
     const [todo, setTodo] = useState('');
     //Need to store the list of Todos
     const [todos, setTodos] = useState<string[]>([]);
+    const [completed, setCompleted] = useState<Record<number, boolean>>({});
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -30,12 +31,16 @@ function TodoApp() {
 
     }
 
+    function toggleComplete(index: number) {
+        setCompleted(prev => ({...prev,[index]: !prev[index] }));
+    }
+
     return (
         <div className='min-h-screen bg-white-100 flex-items-center justify-left'>
             <div className='big-white p-6 rounded-lg shadow-md w-full -max-w-md'>
                 <h1 className='text-3xl mb-4 text-center'>To-Do List</h1>
             <input
-            className='font-[Patrick-Hand]'
+            className=' p-2 m-4 border-gray-300  rounded shadow-sm focus: outline-non font-[Patrick-Hand]'
                 ref={inputRef}
                 type="text"
                 placeholder="Enter a todo"
@@ -63,8 +68,15 @@ function TodoApp() {
                     
                     key={index}
                     className='flex items-center justify-start space-x-3 m-5 p-3'>
-                        <input type="checkbox" className='form-checkbox h-5 w-5'/>
+                        <input type="checkbox" 
+                        className='form-checkbox h-5 w-5'
+                        checked={completed[index] || false}
+                        onChange={()=> toggleComplete(index)}
+                        />
+                        <span className={completed[index] ? 'line-through text-grey-500': ''}>
                         {todo}
+                        
+                        </span>
                         <button
                             className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2"
                             onClick={() => handleRemoveTodo(todo)}
